@@ -32,6 +32,7 @@ app.use("/api/users", require('./routes/RouteUser'));
 app.use("/api/products", require('./routes/ProductRoute'));
 app.use("/api/carts", require('./routes/CartRoute'));
 app.use("/api/orders", require('./routes/OrderRoute'));
+app.use("/api/checkout", require('./routes/StripeRoute'));
 
 
 connectDB().then(() => {

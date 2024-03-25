@@ -15,4 +15,4 @@ const payment = async (req, res) => {
         }
     })
 };
-module.exports ={Payment};
+module.exports ={payment};

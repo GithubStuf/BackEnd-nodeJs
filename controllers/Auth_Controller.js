@@ -54,7 +54,7 @@ const authUser = async (req, res) => {
                 userId: user._id ,
                 isAdmin: user.isAdmin,
             }, process.env.SECRET_KEY, {
-                expiresIn: '3 days'
+                expiresIn: '3d'
             });
 
             const {...others } = user._doc; 

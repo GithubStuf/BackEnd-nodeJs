@@ -54,10 +54,11 @@ const authUser = async (req, res) => {
                 userId: user._id ,
                 isAdmin: user.isAdmin,
             }, process.env.SECRET_KEY, {
-                expiresIn: '1 hour'
+                expiresIn: '3 days'
             });
 
-            res.status(200).json({token });
+            const {...others } = user._doc; 
+            res.status(200).json({...others, token});
 
             } catch (error) {
                 res.status(500).json(error)

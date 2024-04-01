@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt  = require('jsonwebtoken');
 
-const User = require('../models/Users');
+const Users = require('../models/Users');
 
 
 const updateUser = async (req, res)=>{

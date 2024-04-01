@@ -38,19 +38,15 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 
 
 const verifyTokenAndAdmin = (req, res, next) => {
-  verifyToken(req, res, (err, user) => {
-    if (err) {
-      // Handle token verification error (e.g., 401 Unauthorized)
-      return res.status(401).json({ message: "Invalid token" });
-    }
-
-    if (user.isAdmin) {
+  verifyToken(req, res, () => {
+    if (req.user && req.user.isAdmin) { // Check for user and isAdmin property
       next();
     } else {
-      res.status(403).json({ message: "Admin privileges required" });
+      res.status(403).json({ message: "Authorization Denied! You are not an admin." });
     }
   });
 };
+
 
 
 module.exports= {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin};

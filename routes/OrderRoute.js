@@ -49,14 +49,26 @@ router.get('/find/:userId', verifyTokenAndAuthorization, async (req, res)=>{
 })
 
 //GET ALL
-router.get('/', verifyTokenAndAdmin, async (req, res) =>{
-    try {
-        const orders = await Order.find();
-        res.status(200).json(orders);
-    } catch (error) {
-        res.status(500).json(error)
+router.get('/', verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.status(200).json(orders);
+  } catch (error) {
+    // Handle validation errors with a more informative message
+    if (error.name === 'ValidationError') {
+      const validationErrors = {};
+      for (const field in error.errors) {
+        validationErrors[field] = error.errors[field].properties.message;
+      }
+      res.status(400).json({ message: 'Validation failed!', errors: validationErrors });
+    } else {
+      // Handle other errors (e.g., database errors)
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
-})
+  }
+});
+
 
 //GET MONTHLY INCOME
 router.get('/income', verifyTokenAndAdmin, async (req, res) => {

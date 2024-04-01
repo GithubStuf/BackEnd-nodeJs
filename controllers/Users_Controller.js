@@ -46,7 +46,7 @@ const getAllUsers = async (req, res) => {
 
     res.status(200).json({ users });
   } catch (err) {
-    console.error(err); // Log the full error for debugging
+    console.error("Error : /n" + err); // Log the full error for debugging
 
     // Send a more generic error message to the client
     res.status(500).json({ message: "An error occurred fetching users" });

@@ -36,17 +36,23 @@ const findUserById = async (req, res)=>{
     }
 }
 
-const getAllUsers = async (req, res)=>{
-    const query = req.query.new;
-    try{
-        const users = query 
-        ? await Users.find().sort({ _id: -1}).limit(5)
-        : await Users.find();
-        res.status(200).json({users});
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
+const getAllUsers = async (req, res) => {
+  const query = req.query.new;
+
+  try {
+    const users = query
+      ? await Users.find().sort({ _id: -1 }).limit(5) // Find latest 5
+      : await Users.find();
+
+    res.status(200).json({ users });
+  } catch (err) {
+    console.error(err); // Log the full error for debugging
+
+    // Send a more generic error message to the client
+    res.status(500).json({ message: "An error occurred fetching users" });
+  }
+};
+
 
 const getUserStats = async (req, res)=>{
     const date = new Date();

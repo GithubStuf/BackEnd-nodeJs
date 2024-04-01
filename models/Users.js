@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         minLength: 6
     },
+    image: {
+        type:String
+    },
     isAdmin:{
         type:Boolean,
         default: false,

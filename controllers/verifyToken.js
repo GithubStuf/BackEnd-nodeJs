@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
       if (err) {
-        // Handle token verification error (e.g., 401 Unauthorized)
+        // Handle invalid token error (e.g., 401 Unauthorized)
         return res.status(401).json({ message: "Invalid token" });
       }
 
@@ -19,6 +19,7 @@ const verifyToken = (req, res, next) => {
     return res.status(401).json({ message: "You are not authenticated!" });
   }
 };
+
 
 
 const verifyTokenAndAuthorization = (req, res, next) => {

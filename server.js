@@ -19,9 +19,9 @@ const connectDB = async () => {
       process.exit(1);
     }
   }
-
+const allowedOrigins = ['http://localhost:5173'];
 const options = {
-  origin: "http://localhost:5173/",
+  origin: allowedOrigins,
 };
 
 //middlewares

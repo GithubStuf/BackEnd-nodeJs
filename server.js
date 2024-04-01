@@ -20,10 +20,14 @@ const connectDB = async () => {
     }
   }
 
+const options = {
+  origin: "http://localhost:5173/",
+};
+
 //middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+app.use(cors(options));
 
 
 //Routes

@@ -1,7 +1,7 @@
 //Imports
 require('dotenv').config();
 const express = require('express');
-var cors = require('cors')
+const cors = require('cors')
 const mongoose = require('mongoose');
 
 
@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 8080;
 
 const connectDB = async () => {
     try {
-      const conn = await mongoose.connect(process.env.DB_URI,{
+      await mongoose.connect(process.env.DB_URI,{
     });
-      console.log(`Server started at http://localhost:${PORT}`);
+      console.log(`http://localhost:${PORT}`);
     } catch (error) {
       console.log(error);
       process.exit(1);
@@ -40,7 +40,5 @@ app.use("/api/checkout", require('./routes/StripeRoute'));
 
 
 connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log("listening for requests");
-    })
+    app.listen(PORT, () => {})
 })
